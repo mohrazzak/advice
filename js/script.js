@@ -1,14 +1,12 @@
-const navToggler = document.querySelector(".nav-toggler");
-navToggler.addEventListener("click", navToggle);
+fetch("https://api.adviceslip.com/advice")
+  .then((e) => {
+    return e.json();
+  })
+  .then((e) => {
+    document.querySelector(".advice").innerHTML = `"${e.slip.advice}"`;
+    document.querySelector(".h-text").innerHTML = `ADVICE ${e.slip.id}`;
+  });
 
-function navToggle() {
-  navToggler.classList.toggle("active");
-  const nav = document.querySelector(".nav");
-  nav.classList.toggle("open");
-  if (nav.classList.contains("open")) {
-    nav.style.maxHeight = nav.scrollHeight + "px";
-    nav.style.maxWidth = nav.scrollHeight + "px";
-  } else {
-    nav.removeAttribute("style");
-  }
-}
+document.querySelector(".btn").addEventListener("click", () => {
+  location.reload();
+});
